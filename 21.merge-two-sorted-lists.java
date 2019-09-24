@@ -18,8 +18,8 @@ class Solution {
             tmp = l2;
         }
         ListNode p = res;
-        while (tmp.next != null) {
-            if (tmp.val < p.next.val && tmp.val >= p.val) {
+        while (tmp != null) {
+            if (tmp.val <= p.next.val && tmp.val >= p.val) {
                 ListNode t = tmp;
                 tmp = tmp.next;
                 t.next = p.next;
