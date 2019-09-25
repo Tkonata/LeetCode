@@ -7,6 +7,8 @@ class Solution {
     public int strStr(String haystack, String needle) {
         if (needle.equals(""))
             return 0;
+        if (needle.length() > haystack.length())
+            return -1;
         int indexNeedle = 0;
         int index = -1;
         for (int i = 0; i < haystack.length(); i++) {
@@ -21,6 +23,6 @@ class Solution {
                 indexNeedle = 0;
             }
         }
-        return index;
+        return -1;
     }
 }
