@@ -26,6 +26,16 @@ class Solution {
         }
         if (q.next != null && p.next == null) {
             p.next = q.next;
+            p.val += q.val;
+            if (carry) {
+                p.val++;
+                carry = false;
+            }
+            if (p.val > 9) {
+                p.val -= 10;
+                carry = true;
+            }
+
         } else if (q.next == null && p.next == null) {
             p.val += q.val;
             if (carry) {
@@ -36,8 +46,18 @@ class Solution {
                 p.next = new ListNode(1);
             }
             return l1;
-        } else
-            p.next = p.next;
+        } else {
+            p.val += q.val;
+            if (carry) {
+                p.val++;
+                carry = false;
+            }
+            if (p.val > 9) {
+                p.val -= 10;
+                carry = true;
+            }
+
+        }
         p = p.next;
         while (p.next != null) {
             if (carry) {
@@ -52,8 +72,11 @@ class Solution {
             p = p.next;
         }
         if (carry) {
+            p.val++;
+        }
+        if (p.val > 9) {
+            p.val -= 10;
             p.next = new ListNode(1);
-
         }
         return l1;
     }
