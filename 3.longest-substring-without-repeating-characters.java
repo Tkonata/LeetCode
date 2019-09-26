@@ -1,4 +1,5 @@
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * @lc app=leetcode id=3 lang=java
@@ -8,15 +9,14 @@ import java.util.HashSet;
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int le = s.length();
-        int res = 0, i = 0, j = 0;
-        HashSet<Character> set = new HashSet<>();
-        while (i < le && j < le) {
-            if (set.contains(s.charAt(j))) {
-                set.remove(s.charAt(i++));
-            } else {
-                set.add(s.charAt(j++));
-                res = res > (j - i) ? res : j - i;
+        int res = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int j = 0, i = 0; j < le; j++) {
+            if (map.containsKey(s.charAt(j))) {
+                i = Math.max(map.get(s.charAt(j)), i);
             }
+            map.put(s.charAt(j), j + 1);
+            res = Math.max(j - i + 1, res);
         }
         return res;
     }
