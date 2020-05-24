@@ -8,21 +8,31 @@
 public class Solution
 {
     public void NextPermutation(int[] nums) {
-        var i = nums.Length - 1;
-        for(; i > 0; i--)
-        {
-            if(nums[i - 1] < nums[i])
-            {
-                int j = i;
-                for(; j < nums.Length && nums[j] > nums[i - 1]; j++) ;
-                j--;
-                var t = nums[j];
-                nums[j] = nums[i - 1];
-                nums[i - 1] = t;
+        int maxPoint = 0;
+        for(int i = nums.Length - 1; i > 0; i--) {
+            if(nums[i - 1] < nums[i]) {
+                maxPoint = i;
+                var exchangeIndex = 0;
+                for(int j = nums.Length - 1; j >= maxPoint; j--) {
+                    if(nums[j] > nums[maxPoint - 1]) {
+                        exchangeIndex = j;
+                        break;
+                    }
+                }
+                var tmp = nums[maxPoint - 1];
+                nums[maxPoint - 1] = nums[exchangeIndex];
+                nums[exchangeIndex] = tmp;
                 break;
             }
         }
-        Array.Sort(nums, i, nums.Length - i);
+        int left = maxPoint, right = nums.Length - 1;
+        while(left < right) {
+            var tmp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = tmp;
+            left++;
+            right--;
+        }
     }
 }
 // @lc code=end
