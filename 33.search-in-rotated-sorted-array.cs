@@ -15,7 +15,6 @@ public class Solution
             var mid = left + (right - left) / 2;
             if((nums[0] > target) ^ (nums[0] > nums[mid]) ^ (target > nums[mid]))
                 left = mid + 1;
-
             else
                 right = mid;
         }
